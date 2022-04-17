@@ -1,0 +1,7 @@
+{
+  "name": "webpack-bundle-performance-analyzer",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
