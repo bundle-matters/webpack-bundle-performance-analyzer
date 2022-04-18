@@ -2,7 +2,6 @@
 
 module.exports = {
   env: {
-    browser: true,
     es2021: true,
   },
   extends: [
@@ -17,5 +16,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'no-shadow': 'off',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
   },
 };
