@@ -3,7 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
-    "typescript": "^4.6.3"
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "rimraf lib && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "dayjs": "^1.11.1"
   }
 }
