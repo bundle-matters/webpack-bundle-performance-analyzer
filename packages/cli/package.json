@@ -13,6 +13,10 @@
     "build": "rimraf lib && tsc -p ../../configs/tsconfigs/tsconfig.cli.json",
     "prepublishOnly": "npm run build"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "dependencies": {
     "@webpack-bundle-performance/core": "1.0.0",
     "clipanion": "^3.2.0-rc.10",

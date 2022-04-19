@@ -10,7 +10,10 @@
     "build": "rimraf lib && tsc -p ../../configs/tsconfigs/tsconfig.core.json",
     "prepublishOnly": "npm run build"
   },
-  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "dependencies": {
     "chalk": "^5.0.1",
     "dayjs": "^1.11.1"
