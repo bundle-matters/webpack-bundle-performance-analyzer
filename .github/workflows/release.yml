@@ -54,7 +54,6 @@ jobs:
 
       # 安装依赖并构建
       - name: Install dependencies & Build with yarn
-        uses: borales/actions-yarn@v2.3.0
         if: steps.checkTag.outputs.exists == 'false'
         run: |
           npm install -g yarn
