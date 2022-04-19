@@ -1,7 +1,8 @@
 import chalk from 'chalk';
+
 import { fg, bg } from '../colours';
 import { SpeedMeasureDescriptor } from '../interface';
-import { groupBy, getAverages, getTotalActiveTime } from '../utils';
+import { groupBy, getAverages, getTotalActiveTime, getLoaderName } from '../utils';
 
 const MS_IN_MINUTE = 60000;
 const MS_IN_SECOND = 1000;
@@ -75,7 +76,7 @@ export const getHumanOutput = (outputObj: SpeedMeasureDescriptor, options: any =
       .sort((obj1, obj2) => obj2.activeTime - obj1.activeTime)
       .forEach(loaderObj => {
         output +=
-          loaderObj.loaders.map(fg).join(', and \n') +
+          loaderObj.loaders.map(getLoaderName).map(fg).join(', and \n') +
           ' took ' +
           fg(humanTime(loaderObj.activeTime), loaderObj.activeTime) +
           '\n';

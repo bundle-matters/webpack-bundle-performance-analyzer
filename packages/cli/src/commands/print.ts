@@ -3,6 +3,7 @@ import * as path from 'path';
 
 import { Command, Option } from 'clipanion';
 import * as t from 'typanion';
+import { outputAsHuman } from '@webpack-bundle-performance/core';
 
 export class PrintCommand extends Command {
   static usage = Command.Usage({
@@ -36,9 +37,9 @@ export class PrintCommand extends Command {
 
     try {
       const jsonModule = JSON.parse(fileContent);
-      this.context.stdout.write(JSON.stringify(jsonModule));
+      this.context.stdout.write(outputAsHuman(jsonModule));
     } catch (err) {
-      console.error(new Error(`Invalid json file: ${filePath}`));
+      console.error((`Invalid json file: ${filePath}`));
       console.log(err);
     }
   }

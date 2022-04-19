@@ -54,7 +54,7 @@ export const getLoaderNames = (loaders: any[]) =>
           l
             .replace(/\\/g, '/')
             .replace(
-              /^.*\/node_modules\/(@[a-z0-9][\w-.]+\/[a-z0-9][\w-.]*|[^\/]+).*$/,
+              /^.*\/node_modules\/(@[a-z0-9][\w-.]+\/[a-z0-9][\w-.]*|[^/]+).*$/,
               (_: any, m: any) => m
             )
         )
@@ -91,64 +91,7 @@ export const getTotalActiveTime = (group: any) => {
   return mergedRanges.reduce((acc, range) => acc + range.end - range.start, 0);
 };
 
-export const prependLoader = (rules: { map: (arg0: (rules: any) => any) => any; loader: any; use: any[]; options: any; oneOf: any; rules: any; resource: { and: any; or: any; }; }) => {
-  if (!rules) return rules;
-  if (Array.isArray(rules)) return rules.map(prependLoader);
-
-  if (rules.loader) {
-    rules.use = [rules.loader];
-    if (rules.options) {
-      rules.use[0] = { loader: rules.loader, options: rules.options };
-      delete rules.options;
-    }
-    delete rules.loader;
-  }
-
-  if (rules.use) {
-    if (!Array.isArray(rules.use)) rules.use = [rules.use];
-    rules.use.unshift('speed-measure-webpack-plugin/loader');
-  }
-
-  if (rules.oneOf) {
-    rules.oneOf = prependLoader(rules.oneOf);
-  }
-  if (rules.rules) {
-    rules.rules = prependLoader(rules.rules);
-  }
-  if (Array.isArray(rules.resource)) {
-    rules.resource = prependLoader(rules.resource);
-  }
-  if (rules.resource && rules.resource.and) {
-    rules.resource.and = prependLoader(rules.resource.and);
-  }
-  if (rules.resource && rules.resource.or) {
-    rules.resource.or = prependLoader(rules.resource.or);
-  }
-
-  return rules;
-};
-
-export const hackWrapLoaders = (loaderPaths: string | any[], callback: (arg0: any, arg1: any) => any) => {
-  const wrapReq = (reqMethod: { apply: (arg0: any, arg1: IArguments) => any; }) => {
-    return function () {
-      const ret = reqMethod.apply(this, arguments);
-      if (loaderPaths.includes(arguments[0])) {
-        if (ret.__smpHacked) return ret;
-        ret.__smpHacked = true;
-        return callback(ret, arguments[0]);
-      }
-      return ret;
-    };
-  };
-
-  if (typeof System === 'object' && typeof System.import === 'function') {
-    System.import = wrapReq(System.import);
-  }
-  const Module = require('module');
-  Module.prototype.require = wrapReq(Module.prototype.require);
-};
-
-const toCamelCase = (s: string) => s.replace(/(\-\w)/g, (m: string[]) => m[1].toUpperCase());
+const toCamelCase = (s: string) => s.replace(/(-\w)/g, (m) => m[1].toUpperCase());
 
 export const tap = (obj: { hooks: { [x: string]: { tap: (arg0: string, arg1: any) => any; }; }; plugin: (arg0: any, arg1: any) => any; }, hookName: any, func: any) => {
   if (obj.hooks) {
@@ -166,5 +109,6 @@ export const getLoaderName = (loaderStr: string) => {
   }
 
   // convert `_@alipay_lake-html` => @alipay/lake-html
-  return result[1].replace(/^_(@.+)_(.+)/, '$1/$2');
+  // convert `_mini-css-extract-plugin` => `mini-css-extract-plugin`
+  return result[1].slice(1).replace(/^(@.+)_(.+)/, '$1/$2');
 };

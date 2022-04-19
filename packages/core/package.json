@@ -1,13 +1,13 @@
 {
   "name": "@webpack-bundle-performance/core",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "files": [
     "lib"
   ],
   "scripts": {
-    "build": "rimraf lib && tsc",
+    "build": "rimraf lib && tsc -p ../../configs/tsconfigs/tsconfig.core.json",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {},

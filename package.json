@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "build": "rimraf packages/**/lib && tsc -b configs/tsconfig.build.json",
     "lint": "eslint --ext .js,.ts ."
   },
   "dependencies": {},
@@ -18,6 +19,7 @@
     "esno": "^0.14.1",
     "husky": "^7.0.4",
     "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
     "typescript": "^4.6.3"
   },
   "husky": {
