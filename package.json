@@ -11,7 +11,8 @@
   "scripts": {
     "build": "rimraf packages/**/lib && tsc -b configs/tsconfig.build.json",
     "changelog": "lerna-changelog",
-    "lint": "eslint --ext .js,.ts ."
+    "lint": "eslint --ext .js,.ts .",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
