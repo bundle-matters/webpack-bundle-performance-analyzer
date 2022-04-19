@@ -4,13 +4,13 @@
   "bin": {
     "bundle-analyze": "./lib/cli.js"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "files": [
     "lib"
   ],
   "scripts": {
-    "build": "rimraf lib && tsc",
+    "build": "rimraf lib && tsc -p ../../configs/tsconfigs/tsconfig.cli.json",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

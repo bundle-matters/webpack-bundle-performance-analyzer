@@ -1,5 +1,9 @@
+import * as fs from 'fs';
+import * as path from 'path';
+
 import { Command, Option } from 'clipanion';
 import * as t from 'typanion';
+import { outputAsHuman } from '@webpack-bundle-performance/core';
 
 export class PrintCommand extends Command {
   static usage = Command.Usage({
@@ -20,9 +24,23 @@ export class PrintCommand extends Command {
     validator: t.isEnum(['tsv', 'json', 'html']),
   });
 
-  filename = Option.String('--filename');
+  outputFilename = Option.String('--filename');
 
   async execute() {
-    this.context.stdout.write(`Print ${this.format} ${this.file}!\n`);
+    const filePath = path.isAbsolute(this.file) ? this.file : path.resolve(process.cwd(), this.file);
+    
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`File does not existed: ${filePath}`);
+    }
+
+    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+
+    try {
+      const jsonModule = JSON.parse(fileContent);
+      this.context.stdout.write(outputAsHuman(jsonModule));
+    } catch (err) {
+      console.error((`Invalid json file: ${filePath}`));
+      console.log(err);
+    }
   }
 }
