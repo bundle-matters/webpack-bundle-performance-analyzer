@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 import { Cli } from 'clipanion';
 import { PackageJson } from 'type-fest';
