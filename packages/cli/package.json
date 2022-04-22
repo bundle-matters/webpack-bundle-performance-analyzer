@@ -1,6 +1,6 @@
 {
   "name": "@webpack-bundle-performance/cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "bin": {
     "bundle-analyze": "./lib/cli.js"
   },
@@ -18,7 +18,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@webpack-bundle-performance/core": "1.0.3",
+    "@webpack-bundle-performance/core": "1.0.4",
     "clipanion": "^3.2.0-rc.10",
     "typanion": "^3.7.2",
     "type-fest": "^2.12.2"
