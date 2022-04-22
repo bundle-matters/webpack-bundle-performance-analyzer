@@ -6,7 +6,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:vagusX/webpack-bundle-performance-analyzer.git"
+    "url": "git@github.com:bundle-matters/webpack-bundle-performance-analyzer.git"
   },
   "scripts": {
     "build": "rimraf packages/**/lib && tsc -b configs/tsconfig.build.json",

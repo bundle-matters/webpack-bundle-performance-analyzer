@@ -76,7 +76,7 @@ export const getHumanOutput = (outputObj: SpeedMeasureDescriptor, options: any =
       .sort((obj1, obj2) => obj2.activeTime - obj1.activeTime)
       .forEach(loaderObj => {
         output +=
-          loaderObj.loaders.map(getLoaderName).map(fg).join(', and \n') +
+          loaderObj.loaders.map(getLoaderName).map(fg).join(', and ') +
           ' took ' +
           fg(humanTime(loaderObj.activeTime), loaderObj.activeTime) +
           '\n';
